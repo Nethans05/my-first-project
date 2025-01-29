@@ -1,0 +1,29 @@
+/* Ensure the body and html take full height */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+/* Flexbox to ensure footer stays at the bottom */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Full viewport height */
+}
+
+/* Main content area */
+main {
+  flex: 1; /* Take up remaining space */
+}
+
+/* Footer styling */
+footer {
+  background: linear-gradient(90deg, #1E90FF, #4CAF50);
+  color: #fff;
+  padding: 15px 20px;
+  text-align: center;
+  box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  position: relative;
+  bottom: 0;
+}
