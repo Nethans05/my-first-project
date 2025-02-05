@@ -27,7 +27,7 @@ const Header = () => {
           <button
             key={index}
             onClick={() => handleClick(path)}
-            className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+            className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-base px-6 py-3 text-center"
           >
             {path.replace("/", "") || "Home"}
           </button>
@@ -36,7 +36,7 @@ const Header = () => {
 
       {/* Hamburger Button */}
       <button
-        className="md:hidden text-white focus:outline-none"
+        className="md:hidden text-white focus:outline-none text-2xl"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
         {isMenuOpen ? "✖" : "☰"}
@@ -44,9 +44,7 @@ const Header = () => {
 
       {/* Popup Menu */}
       {isMenuOpen && (
-        <nav
-          className="absolute right-4 top-16 bg-white shadow-lg rounded-lg p-3 w-48 z-50"
-        >
+        <nav className="absolute right-4 top-16 bg-white shadow-lg rounded-lg p-3 w-48 z-50">
           <ul className="flex flex-col gap-2">
             {["/", "/about", "/projects", "/contact"].map((path, index) => (
               <li key={index}>
@@ -55,7 +53,7 @@ const Header = () => {
                     handleClick(path);
                     setIsMenuOpen(false);
                   }}
-                  className="text-black w-full text-left hover:bg-gray-100 p-2 rounded"
+                  className="text-black w-full text-left hover:bg-gray-100 p-3 rounded text-base"
                 >
                   {path.replace("/", "") || "Home"}
                 </button>
