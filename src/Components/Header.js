@@ -1,11 +1,11 @@
-import React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Function to navigate to a new page
   const handleClick = (path) => {
     if (location.pathname !== path) {
       navigate(path);
@@ -13,75 +13,59 @@ const Header = () => {
   };
 
   return (
-    <header style={styles.header}>
-      <div style={styles.logo}>
-        <span style={styles.logoText}>N</span>
+    <header className="bg-gradient-to-r from-green-400 to-blue-500 p-5 shadow-lg flex justify-between items-center">
+      {/* Logo */}
+      <div className="flex items-center cursor-pointer" onClick={() => handleClick("/")}>
+        <div className="bg-white text-green-600 font-bold text-xl rounded-full w-12 h-12 flex justify-center items-center">
+          N
+        </div>
       </div>
-      <nav style={styles.nav}>
-        <button
-          type="button"
-          className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-          onClick={() => handleClick('/')}
-        >
-          Home
-        </button>
 
-        <button
-          type="button"
-          className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-          onClick={() => handleClick('/about')}
-        >
-          About
-        </button>
-
-        <button
-          type="button"
-          className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-          onClick={() => handleClick('/projects')}
-        >
-          Projects
-        </button>
-
-        <button
-          type="button"
-          className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-          onClick={() => handleClick('/contact')}
-        >
-          Contact
-        </button>
+      {/* Navigation for Desktop */}
+      <nav className="hidden md:flex gap-8">
+        {["/", "/about", "/projects", "/contact"].map((path, index) => (
+          <button
+            key={index}
+            onClick={() => handleClick(path)}
+            className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+          >
+            {path.replace("/", "") || "Home"}
+          </button>
+        ))}
       </nav>
+
+      {/* Hamburger Button */}
+      <button
+        className="md:hidden text-white focus:outline-none"
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+      >
+        {isMenuOpen ? "✖" : "☰"}
+      </button>
+
+      {/* Popup Menu */}
+      {isMenuOpen && (
+        <nav
+          className="absolute right-4 top-16 bg-white shadow-lg rounded-lg p-3 w-48 z-50"
+        >
+          <ul className="flex flex-col gap-2">
+            {["/", "/about", "/projects", "/contact"].map((path, index) => (
+              <li key={index}>
+                <button
+                  onClick={() => {
+                    handleClick(path);
+                    setIsMenuOpen(false);
+                  }}
+                  className="text-black w-full text-left hover:bg-gray-100 p-2 rounded"
+                >
+                  {path.replace("/", "") || "Home"}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
     </header>
   );
-};
-
-const styles = {
-  header: {
-    padding: '15px 20px',
-    background: 'linear-gradient(90deg, #4CAF50, #1E90FF)',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
-  },
-  logo: {
-    backgroundColor: '#fff',
-    borderRadius: '50%',
-    width: '50px',
-    height: '50px',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.3)',
-  },
-  logoText: {
-    fontSize: '24px',
-    fontWeight: 'bold',
-    color: '#4CAF50',
-  },
-  nav: {
-    display: 'flex',
-    gap: '20px',
-  },
 };
 
 export default Header;
