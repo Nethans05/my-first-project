@@ -23,7 +23,7 @@ const Header = () => {
 
       {/* Navigation for Desktop */}
       <nav className="hidden md:flex gap-8">
-        {["/", "/about", "/projects", "/contact"].map((path, index) => (
+        {["/","/projects", "/contact"].map((path, index) => (
           <button
             key={index}
             onClick={() => handleClick(path)}
@@ -46,7 +46,7 @@ const Header = () => {
       {isMenuOpen && (
         <nav className="absolute right-4 top-16 bg-white shadow-lg rounded-lg p-3 w-48 z-50">
           <ul className="flex flex-col gap-2">
-            {["/", "/about", "/projects", "/contact"].map((path, index) => (
+            {["/", "/projects", "/contact"].map((path, index) => (
               <li key={index}>
                 <button
                   onClick={() => {
